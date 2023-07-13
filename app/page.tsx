@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import { CarCard, CustomFilter, Hero, SearchBar, ShowMore } from "@/components";
-import { fuels, yearsOfProduction } from "@/constants";
-import { fetchCars } from "@/utils";
 import Image from "next/image";
+
+import { fetchCars } from "@/utils";
+import { fuels, yearsOfProduction } from "@/constants";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [allCars, setAllCars] = useState([]);
@@ -59,19 +59,15 @@ export default function Home() {
         </div>
 
         <div className="home__filters">
-          <SearchBar setManufacturer={setManufacturer} setModel={setModel} />
+          <SearchBar />
 
           <div className="home__filter-container">
-            <CustomFilter title="fuel" options={fuels} setFilter={setFuel} />
-            <CustomFilter
-              title="year"
-              options={yearsOfProduction}
-              setFilter={setYear}
-            />
+            <CustomFilter title="fuel" options={fuels} />
+            <CustomFilter title="year" options={yearsOfProduction} />
           </div>
         </div>
 
-        {allCars.length > 0 ? (
+        {!isDataEmpty ? (
           <section>
             <div className="home__cars-wrapper">
               {allCars?.map((car) => (
@@ -79,22 +75,9 @@ export default function Home() {
               ))}
             </div>
 
-            {loading && (
-              <div className="mt-16 w-full flex-center">
-                <Image
-                  src="/loader.svg"
-                  alt="loader"
-                  width={50}
-                  height={50}
-                  className="object-contain"
-                />
-              </div>
-            )}
-
             <ShowMore
-              pageNumber={limit / 10}
-              isNext={limit > allCars.length}
-              setLimit={setLimit}
+              pageNumber={(limit || 10) / 10}
+              isNext={(limit || 10) > allCars.length}
             />
           </section>
         ) : (
