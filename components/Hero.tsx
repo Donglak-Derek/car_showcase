@@ -5,17 +5,22 @@ import Image from "next/image";
 import CustomButton from "./CustomButton";
 
 const Hero = () => {
-  const handleScroll = () => {};
+  const handleScroll = () => {
+    const searchBarSection = document.getElementById("discover");
+    if (searchBarSection) {
+      searchBarSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="hero">
       <div className="flex-1 pt-36 padding-x">
         <h1 className="hero__title">
-          Find, book, or rent a car - quickly and easily!
+          Test it out,<br></br> Own it later!
         </h1>
 
         <p className="hero__subtitle">
-          Streamline your car rental experience with our effortless booking
-          process.
+          Effortless rentals for confident purchases.
         </p>
 
         <CustomButton
@@ -27,7 +32,12 @@ const Hero = () => {
 
       <div className="hero__image-container">
         <div className="hero__image">
-          <Image src="/hero.png" alt="hero" fill className="object-contain" />
+          <Image
+            src="/hero_gray.v1.cropped.png"
+            alt="hero"
+            fill
+            className="object-contain"
+          />
         </div>
         <div className="hero__image-overlay"></div>
       </div>
